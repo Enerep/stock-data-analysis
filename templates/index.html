@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>Stock Analysis</h1>
+        <form method="POST">
+            <input type="text" name="ticker" placeholder="Enter stock ticker (e.g., AAPL)" required>
+            <button type="submit">Analyze</button>
+        </form>
+        
+
+        <!--2nd -->
+        {% if chart_path %}
+        <div class="result">
+            <img src="/static/{{ chart_path }}" alt="Stock Chart">
+            <h2>Stock Information:</h2>
+            <ul>
+                {% for key, value in info.items() %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+
+</html>
