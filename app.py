@@ -38,5 +38,32 @@ def index():
         return render_template("index.html", chart_path="chart.png", info=info)
     return render_template("index.html")
 
+
+#analyze
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    ticker = request.form["ticker"].upper()
+    stock = yf.Ticker(ticker)
+    
+    # get data and stock info
+    try:
+        data = stock.history(period="6mo")
+        info = stock.info
+        
+        # generatechart
+        plt.figure(figsize=(10, 6))
+        data["Close"].plot(title=f"{ticker} Stock Price (6mo)", xlabel="Date", ylabel="Price")
+        chart_path = os.path.join("static", "chart.png")
+        plt.savefig(chart_path)
+        plt.close()
+        
+        return render_template("analyze.html", ticker=ticker, chart_path="chart.png", info=info)
+        
+    except Exception as e:
+        # invalid ticker. qa
+        error_message = f"Unable to retrieve data for ticker '{ticker}'. Please try again."
+        return render_template("analyze.html", error=error_message)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
