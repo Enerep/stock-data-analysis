@@ -36,7 +36,9 @@ body {
     background: linear-gradient(120deg, #0f0f0f, #1a1a1a, #0f0f0f);
     background-size: 300% 300%;
     animation: gradientShift 15s ease infinite;
+    /*transition: filter 0.8s ease;*/
 }
+
 
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -239,4 +241,136 @@ body.home-page .main-content {
 .info-card p {
     font-size: 1rem;
     color: #ddd;
+}
+
+
+
+
+
+/*testin new stuff*/
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, #0f0f0f, #1a1a1a, #0f0f0f);
+    background-size: 300% 300%;
+    animation: gradientShift 15s ease infinite;
+    transition: filter 0.8s ease;
+}
+.background.darkened {
+    filter: brightness(0.7);
+}
+.main-content {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s ease;
+}
+/*  some hover magic*/
+.hover-text {
+    font-size: 10rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.8s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.hover-text:hover {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 40px rgba(255, 255, 255, 0.6),
+                 0 0 60px rgba(97, 218, 251, 0.4);
+    transform: scale(1.05);
+    letter-spacing: 0.15em;
+}
+
+.hover-text::before {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(97, 218, 251, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.hover-text:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+    animation: lightning 1.5s infinite;
+}
+
+@keyframes lightning {
+    0% {
+        transform: translateX(-100%) skewX(-45deg);
+    }
+    100% {
+        transform: translateX(100%) skewX(-45deg);
+    }
+}
+.ticker-bar {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.ticker-input {
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease, transform 0.2s ease;
+}
+
+.ticker-input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
+}
+
+.ticker-submit {
+    position: relative;
+    overflow: hidden;
+}
+
+.ticker-submit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+}
+
+.ticker-submit:hover::after {
+    transform: translateX(100%);
+    transition: transform 0.6s ease;
+}
+
+
+
+/* for analyze*/
+.info-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--card-index) * 0.1s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
