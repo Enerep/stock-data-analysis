@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis - {{ ticker }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="background">
+        
+        <div class="main-content">
+            {% if error %}
+                <h1 class="error">{{ error }}</h1>
+            
+            {% else %}
+                <!-- title adn ticker -->
+                <div class="header">
+                    <h1 class="analysis-title">Analysis for {{ ticker }}</h1>
+                </div>
+
+                <!-- stock chart -->
+                <div class="chart-container">
+                    <img src="/static/{{ chart_path }}" alt="Stock Chart" class="stock-chart">
+                </div>
+
+                <!-- grid section -->
+                <div class="info-container">
+                    <h2>Stock Information</h2>
+                <div class="info-grid">
+                    {% for key, value in info.items() %}
+                        <div class="info-card">
+                            <h3>{{ key }}</h3>
+                            <p>{{ value }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+            {% endif %}
+
+        </div>
+        
+        <div class="bottom-bar">
+            <p>Powered by Bat | <a href="/">Go Back(hope it works lol)</a></p>
+        </div>
+
+    </div>
+
+</body>
+</html>
