@@ -48,5 +48,15 @@
 
     </div>
 
+    <!--  nosed  -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card');
+            cards.forEach((card, index) => {
+                card.style.setProperty('--card-index', index);
+            });
+        });
+    </script>
+
 </body>
 </html>
